@@ -34,8 +34,16 @@ cd get-started-openai
 python sample.py
 ```
 
+## Examples
 
+- [Sample for Qlearning example](https://gym.openai.com/evaluations/eval_43MxbJClQoOb0vmXdR8pw)
+
+- [Sample for tflearn with training data](https://pythonprogramming.net/openai-cartpole-neural-network-example-machine-learning-tutorial/)
+
+- [Medium: Simple Reinforcement Learning](https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-0-q-learning-with-tables-and-neural-networks-d195264329d0)
 ## References
+
+- [OpenAI GYM installation instructions](https://github.com/openai/gym#installing-everything)
 
 - [Conda env creation for open ai](https://github.com/openai/universe-starter-agent)
 

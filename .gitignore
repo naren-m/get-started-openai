@@ -1,2 +1,6 @@
 .vscode
 *.npy
+tags
+log
+log/*
+.ipynb_checkpoints

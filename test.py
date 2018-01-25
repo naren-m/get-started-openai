@@ -18,21 +18,6 @@ goal_steps = 500
 score_requirement = 50
 initial_games = 10000
 
-
-def random_games():
-    for episode in range(5):
-        env.reset()
-        for t in range(goal_steps):
-            env.render()
-            action = env.action_space.sample()
-            observation, reward, done, info = env.step(action)
-            if done:
-                break
-
-
-# random_games()
-
-
 def initial_population():
     # [OBS, MOVES]
     training_data = []
@@ -132,6 +117,7 @@ def train_model(training_data, model=False):
 
     if not model:
         model = neural_network_mode(input_size=len(X[0]))
+        print("naren", len(X[0]))
 
     model.fit({'input': X}, {'targets': y}, n_epoch=5,
               snapshot_step=500, show_metric=True, run_id='openaistuff')
@@ -141,38 +127,5 @@ def train_model(training_data, model=False):
 
 training_data = initial_population()
 model = train_model(training_data)
+model.save("cartpole.tfl")
 
-
-scores = []
-choices = []
-
-for each_game in range(10):
-    score = 0
-    game_memory = []
-    prev_obs = []
-    env.reset()
-    for _ in range(goal_steps):
-        env.render()
-
-        if len(prev_obs) == 0:
-            action = random.randrange(0, 2)
-        else:
-            # print(model.predict(prev_obs.reshape(-1, len(prev_obs), 1)))
-            action = np.argmax(model.predict(
-                prev_obs.reshape(-1, len(prev_obs), 1))[0])
-
-        choices.append(action)
-
-        new_observation, reward, done, info = env.step(action)
-        prev_obs = new_observation
-        game_memory.append([new_observation, action])
-        score += reward
-        if done:
-            break
-
-    scores.append(score)
-
-print('Average Score:', sum(scores) / len(scores))
-print('choice 1:{}  choice 0:{}'.format(choices.count(
-    1) / len(choices), choices.count(0) / len(choices)))
-print(score_requirement)
